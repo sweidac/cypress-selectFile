@@ -11,15 +11,22 @@
 // please read our getting started guide:
 // https://on.cypress.io/introduction-to-cypress
 
-describe('example to-do app', () => {
-  beforeEach(() => {
-    cy.visit('https://example.cypress.io/todo')
-  })
+describe('selectFile()', () => {
 
-  it('displays two todo items by default', () => {
+  it('can selectFile() off cy.document()', () => {
+    cy.visit('https://example.cypress.io/todo')
+
     cy.document().selectFile({
-      fileName : 'example.json',
+      fileName : 'cypress/fixtures/example.json',
       action : 'drag-drop'
     });
   })
+
+  it('can selectFile() off input[type=file]', () => {
+    cy.visit('https://www.freeconvert.com/csv-converter');
+
+    cy.get('input[type=file]')
+      .selectFile('cypress/fixtures/example.json', { force : true })
+  })
+
 })
